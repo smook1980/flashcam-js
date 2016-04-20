@@ -1,0 +1,45 @@
+{
+  "name": "flashcam-js",
+  "version": "0.1.0",
+  "description": "Flashcam-JS makes it easy to publish an audio and video stream from the browser to an RTMP with a simple Javascript API to interface with a flash component. ",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "browserify ./src/main.js --debug | exorcist flashcam.js.map > flashcam.js",
+    "demo": "node ./demo/demo-server.js",
+    "test-server": "node ./demo/test-server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/smook1980/flashcam-js.git"
+  },
+  "keywords": [
+    "flash",
+    "webcam",
+    "actionscript",
+    "red5",
+    "rtmp",
+    "video",
+    "publish"
+  ],
+  "author": {
+    "name": "Shane Mook",
+    "email": "shane.mook+flashcam@gmail.com",
+    "url": "https://github.com/smook1980"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smook1980/flashcam-js/issues"
+  },
+  "homepage": "https://github.com/smook1980/flashcam-js#readme",
+  "dependencies": {
+    "inherits": "^2.0.1"
+  },
+  "devDependencies": {
+    "ansi": "^0.3.1",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "budo": "^8.2.1",
+    "nightwatch": "^0.8.18",
+    "selenium-server-standalone-jar": "^2.53.0"
+  }
+}

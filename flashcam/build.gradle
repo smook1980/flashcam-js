@@ -1,0 +1,37 @@
+buildscript {
+  repositories {
+    mavenLocal()
+    mavenCentral()
+  }
+  dependencies {
+    classpath group: 'org.gradlefx', name: 'gradlefx', version: '1.1'
+  }
+}
+
+apply plugin: 'gradlefx'
+apply plugin: 'templates'
+
+type = 'swf'
+version = '1.0-SNAPSHOT'
+
+repositories {
+  ivy {
+    name 'Apache Flex'
+    artifactPattern 'http://mirrors.ocf.berkeley.edu/apache/flex/[revision]/binaries/[module]-[revision]-bin.[ext]'
+  }
+}
+
+dependencies {
+  flexSDK group: 'org.apache', name: 'apache-flex-sdk', version: '4.15.0', ext: 'tar.gz'
+}
+
+// Answer yes to all prompts to download the SDK and third party requirements.
+sdkAutoInstall {
+  showPrompts	= true
+}
+
+htmlWrapper {
+  title         = 'Flashcam'
+  percentHeight = 80
+  percentWidth  = 80
+}

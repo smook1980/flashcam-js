@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- http://blog.flexexamples.com/2008/01/22/displaying-a-webcams-video-in-a-flex-videodisplay-control/ -->
+<mx:Application name="VideoDisplay_attachCamera_test"
+				xmlns:mx="http://www.adobe.com/2006/mxml"
+				layout="vertical"
+				verticalAlign="middle"
+				backgroundColor="white">
+
+	<mx:Script>
+        <![CDATA[
+		var camera1:Camera; // = Camera.getCamera();
+		var nc:NetConnection; // = new NetConnection();
+
+		private function netStatusHandler(event:NetStatusEvent):void {
+			switch (event.info.code) {
+				case "NetConnection.Connect.Success":
+					var ns:NetStream = new NetStream(nc);
+					ns.attachCamera(camera1);
+					ns.publish("test", "live");
+					break;
+				case "NetStream.Play.StreamNotFound":
+					trace("Unable to locate video: ");
+					break;
+			}
+		}
+
+		private function videoDisplay_creationComplete():void {
+			camera1 = Camera.getCamera();
+
+			var video:Video = new Video(285, 254);
+			if (camera1)
+			{
+				video.attachCamera(camera1);
+				videoDisplay.attachCamera(camera1);
+//                camera1.addEventListener(ActivityEvent.ACTIVITY, camera_activity);
+//                camera1.addEventListener(StatusEvent.STATUS, camera_status);
+			}
+
+			nc = new NetConnection();
+			nc.connect("rtmp://po9nawn4.rtmphost.com/Application");
+			nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+		}
+		]]>
+    </mx:Script>
+
+	<mx:VideoDisplay id="videoDisplay"
+					 creationComplete="videoDisplay_creationComplete();"
+					 width="1280"
+					 height="720" />
+
+	<mx:Button id="button"
+			   label="Reload Camera"
+			   click="videoDisplay_creationComplete();" />
+
+</mx:Application>
